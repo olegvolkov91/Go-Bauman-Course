@@ -18,12 +18,14 @@ func main() {
 	}
 	defer jsonFile.Close()
 
+	// вычитываем jsonFile в виде последовательности байтш
 	fileInfo, err := io.ReadAll(jsonFile)
 	if err != nil {
 		log.Fatal(errors.New("can not read the file"))
 	}
 	var data users.Users
 
+	// проводим десериализацию
 	if err := json.Unmarshal(fileInfo, &data); err != nil {
 		log.Fatal(errors.New("can not parse the file"))
 	}
