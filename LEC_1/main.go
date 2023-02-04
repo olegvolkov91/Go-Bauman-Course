@@ -12,7 +12,7 @@ import (
 
 func main() {
 	fmt.Println("Hello world")
-	jsonFile, err := os.Open("./users.json")
+	jsonFile, err := os.Open("./internal/users/users.json")
 	if err != nil {
 		log.Fatal(errors.New("can not open the file"))
 	}
