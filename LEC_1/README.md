@@ -68,13 +68,11 @@
 
 * После чего полученные данные можно куда-то записать 
 ```
-	data, err := json.Marshal(u)
+    data, err := json.Marshal(u)
     if err != nil {...}
     
-    if err := os.WriteFile("output.json", bytesArr, 0664); err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Saved")
+    if err := os.WriteFile("output.json", bytesArr, 0664); err != nil {...}
+    fmt.Println("Saved")
 ```
 
 ***ВАЖНО:***  :0664/0666 - это права доступа к файлу (в нашем случае это ```rw``)
