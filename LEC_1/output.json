@@ -1,0 +1,23 @@
+{
+  "id": 123,
+  "name": "Viktor",
+  "username": "Volodar Kopalni",
+  "email": "",
+  "address": {
+    "street": "unknown",
+    "suite": "unknown",
+    "city": "Zhmerinka",
+    "zipcode": "61070",
+    "geo": {
+      "lat": "61,33,44",
+      "lng": "39, 16, -120"
+    }
+  },
+  "phone": "0931234567",
+  "website": "www.google.com",
+  "company": {
+    "name": "SelfEmployed",
+    "catchPhrase": "Do your best!",
+    "bs": "unknown"
+  }
+}
