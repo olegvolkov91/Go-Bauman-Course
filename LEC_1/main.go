@@ -16,6 +16,7 @@ func main() {
 	if err != nil {
 		log.Fatal(errors.New("can not open the file"))
 	}
+	defer jsonFile.Close()
 
 	fileInfo, err := io.ReadAll(jsonFile)
 	if err != nil {
