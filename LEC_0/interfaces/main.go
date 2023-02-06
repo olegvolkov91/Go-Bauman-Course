@@ -43,6 +43,7 @@ func main() {
 
 	var animal Animal = &Pigeon{}
 	fmt.Printf("Animal %T\n", animal)
+	TypeFinder(animal)
 }
 
 func Run(r Runner) {
@@ -51,4 +52,15 @@ func Run(r Runner) {
 
 func Fly(f Flyer) {
 	f.Fly()
+}
+
+func TypeFinder(i interface{}) {
+	switch v := i.(type) {
+	case Runner:
+		fmt.Printf("This is a runner %v\n", v)
+	case Flyer:
+		fmt.Printf("This is a flyer %v\n", v)
+	default:
+		fmt.Println("Unknown type")
+	}
 }
