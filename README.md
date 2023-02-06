@@ -13,11 +13,14 @@
 * [Алгоритмы. Построение и анализ](https://www.ozon.ru/context/detail/id/33769775/)
 * [Теоретический минимум по Computer Science](https://www.ozon.ru/context/detail/id/144946027/)
 ***
-#### Уровень 3
+#### Уровень 2.5
 * [Производительность[SPEC]](https://www.amazon.com/Systems-Performance-Enterprise-Brendan-Gregg/dp/0133390098)
-* [GO структуры](https://github.com/Workiva/go-datastructures)
 * [GO структура проекта](https://github.com/golang-standards/project-layout)
+***
+#### Уровень 3
+* [GO структуры](https://github.com/Workiva/go-datastructures)
 * [Как ревьюить код](https://github.com/golang/go/wiki/CodeReviewComments)
+* [CI/CD](https://habr.com/ru/company/otus/blog/650435/)
 ***
 #### Уровень 4
 * [ROADMAP](https://github.com/Alikhll/golang-developer-roadmap)
