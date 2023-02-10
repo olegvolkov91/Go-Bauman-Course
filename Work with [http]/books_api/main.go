@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/olegvolkov91/Go-Bauman-Course/tree/main/books_api/utils"
 	"log"
 	"net/http"
 	"os"
@@ -33,6 +34,6 @@ func main() {
 	utils.BuildBookResource(router, bookResourcePrefix)
 	utils.BuildManyBooksResourcePrefix(router, manyBooksResourcePrefix)
 
-	log.Println("Router initalizing successfully. Ready to go!")
+	log.Println("Router initializing successfully. Ready to go!")
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
