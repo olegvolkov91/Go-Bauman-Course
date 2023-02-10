@@ -9,9 +9,10 @@ import (
 
 // API ... Base api service description
 type API struct {
-	config  *Config
-	logger  *logrus.Logger
-	router  *mux.Router
+	config *Config
+	logger *logrus.Logger
+	router *mux.Router
+	// Добавление поля для работы с хранилищем
 	storage *storage.Storage
 }
 

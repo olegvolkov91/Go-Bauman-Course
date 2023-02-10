@@ -28,6 +28,7 @@ func (api *API) configureStorage() error {
 	if err := store.Open(); err != nil {
 		return err
 	}
+	// сохраняем его в экземпляре API для дальнейшей работы
 	api.storage = store
 	return nil
 }
