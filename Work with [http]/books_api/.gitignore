@@ -1,0 +1,8 @@
+# macOS files
+.DS_Store
+
+# IDEA folder
+.idea
+
+# environment variables
+.env
