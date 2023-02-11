@@ -18,7 +18,7 @@ var (
 func (ur *UserRepository) Create(u *models.User) (*models.User, error) {
 	query := fmt.Sprintf("INSERT INTO %s (login, password_hash) VALUES ($1, $2) RETURNING id", tableUser)
 
-	row := ur.store.db.QueryRow(query, u.Login, u.Password)
+	row := ur.store.db.QueryRow(query, u.Login, u.PasswordHash)
 	if err := row.Scan(&u.Id); err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (ur *UserRepository) SelectAll() ([]*models.User, error) {
 
 	for rows.Next() {
 		u := models.User{}
-		err := rows.Scan(&u.Id, &u.Login, &u.Password)
+		err := rows.Scan(&u.Id, &u.Login, &u.PasswordHash)
 		if err != nil {
 			log.Println(err)
 			continue

@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/olegvolkov91/Go-Bauman-Course/tree/main/standardwebserver/internal/models"
 	"net/http"
@@ -173,5 +174,68 @@ func (api *API) DeleteArticleById(writer http.ResponseWriter, req *http.Request)
 }
 
 func (api *API) RegisterUser(writer http.ResponseWriter, req *http.Request) {
+	initHeaders(writer)
+	api.logger.Info("Register user POST /api/v1/register")
 
+	var user models.User
+	if err := json.NewDecoder(req.Body).Decode(&user); err != nil {
+		api.logger.Info("Invalid json received from client")
+		msg := Message{
+			Message:    "Provided json is invalid",
+			StatusCode: http.StatusBadRequest,
+			IsError:    true,
+		}
+		writer.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(writer).Encode(msg)
+		return
+	}
+
+	// Находим пользователя в базе
+	_, ok, err := api.storage.User().FindByLogin(user.Login)
+	if err != nil {
+		api.logger.Info("Troubles while accessing database table (users) with id. err:", err)
+		msg := Message{
+			Message:    "We have troubles to accessing database. Try again later",
+			StatusCode: http.StatusInternalServerError,
+			IsError:    true,
+		}
+		writer.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(writer).Encode(msg)
+		return
+	}
+
+	// Если такой пользователь есть, то регистрацию не делаем
+	if ok {
+		api.logger.Info("User with that login already exists")
+		msg := Message{
+			Message:    "User already exists",
+			StatusCode: http.StatusBadRequest,
+			IsError:    true,
+		}
+		writer.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(writer).Encode(msg)
+		return
+	}
+
+	newUser, err := api.storage.User().Create(&user)
+
+	if err != nil {
+		api.logger.Info("Troubles while accessing database table (users) with id. err:", err)
+		msg := Message{
+			Message:    "We have troubles to accessing database. Try again later",
+			StatusCode: http.StatusInternalServerError,
+			IsError:    true,
+		}
+		writer.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(writer).Encode(msg)
+		return
+	}
+
+	msg := Message{
+		Message:    fmt.Sprintf("User {login: %s}successfully registred!", newUser.Login),
+		StatusCode: http.StatusCreated,
+		IsError:    false,
+	}
+	writer.WriteHeader(http.StatusCreated)
+	json.NewEncoder(writer).Encode(msg)
 }

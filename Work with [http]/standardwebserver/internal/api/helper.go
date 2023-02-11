@@ -25,7 +25,7 @@ func (api *API) configureRouter() {
 	api.router.HandleFunc(prefix+"/articles/{id}", api.DeleteArticleById).Methods(http.MethodDelete)
 	api.router.HandleFunc(prefix+"/articles", api.CreateArticle).Methods(http.MethodPost)
 
-	api.router.HandleFunc(prefix+"/register", api.RegisterUser).Methods(http.MethodPost)
+	api.router.HandleFunc(prefix+"/user/register", api.RegisterUser).Methods(http.MethodPost)
 }
 
 func (api *API) configureStorage() error {
