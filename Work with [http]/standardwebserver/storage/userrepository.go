@@ -28,7 +28,7 @@ func (ur *UserRepository) Create(u *models.User) (*models.User, error) {
 
 func (ur *UserRepository) FindByLogin(login string) (*models.User, bool, error) {
 	users, err := ur.SelectAll()
-	
+
 	var founded bool
 	if err != nil {
 		return nil, founded, err
