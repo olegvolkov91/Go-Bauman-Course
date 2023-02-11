@@ -25,7 +25,7 @@ func (api *API) GetAllArticles(writer http.ResponseWriter, _ *http.Request) {
 	// Логируем момент начала обработки
 	api.logger.Info("Get all articles GET /api/v1/articles")
 	articles, err := api.storage.Article().SelectAll()
-	
+
 	if err != nil {
 		// Обработка ошибки при подключении к БД
 		api.logger.Info("Error while Articles.SelectAll : ", err)
@@ -46,10 +46,11 @@ func (api *API) GetAllArticles(writer http.ResponseWriter, _ *http.Request) {
 // GetArticleById ... Возвращаем статью по id из БД
 func (api *API) GetArticleById(writer http.ResponseWriter, req *http.Request) {
 	initHeaders(writer)
-	params := mux.Vars(req)
-	id, err := strconv.Atoi(params["id"])
+	id, err := strconv.Atoi(mux.Vars(req)["id"])
+	api.logger.Infof("Get article by id GET /api/v1/article/{%d}", id)
+
 	if err != nil {
-		api.logger.Info("GetArticleById : ", err)
+		api.logger.Info("Troubles while parsing id param : ", err)
 		msg := Message{
 			Message:    "Error while accessing id param",
 			StatusCode: http.StatusBadRequest,
@@ -97,7 +98,7 @@ func (api *API) GetArticleById(writer http.ResponseWriter, req *http.Request) {
 func (api *API) CreateArticle(writer http.ResponseWriter, req *http.Request) {
 	initHeaders(writer)
 	// Логируем момент начала обработки
-	api.logger.Info("Post article POST /api/v1/articles")
+	api.logger.Infof("Create article POST /api/v1/article")
 	var body models.Article
 
 	if err := json.NewDecoder(req.Body).Decode(&body); err != nil {
@@ -134,11 +135,11 @@ func (api *API) CreateArticle(writer http.ResponseWriter, req *http.Request) {
 // DeleteArticleById ... Удаляем статью из БД
 func (api *API) DeleteArticleById(writer http.ResponseWriter, req *http.Request) {
 	initHeaders(writer)
-	params := mux.Vars(req)
-	id, err := strconv.Atoi(params["id"])
+	id, err := strconv.Atoi(mux.Vars(req)["id"])
+	api.logger.Infof("Delete article by id DELETE /api/v1/article/{%d}", id)
 
 	if err != nil {
-		api.logger.Info("DeleteArticleById : ", err)
+		api.logger.Info("Troubles while parsing id param : ", err)
 		msg := Message{
 			Message:    "Error while accessing id param",
 			StatusCode: http.StatusBadRequest,
