@@ -12,4 +12,3 @@ migrate:
 
 drop:
 	migrate -path migrations -databse "postgres://localhost:5432/restapi?sslmode=disable&user=postgres&password=postgres" down
-.DEFAULT_GOAL:=run

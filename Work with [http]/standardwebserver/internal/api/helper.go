@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+var (
+	prefix string = "/api/v1"
+)
+
 func (api *API) configureLogger() error {
 	logLevel, err := logrus.ParseLevel(api.config.LogLevel)
 	if err != nil {
@@ -16,9 +20,12 @@ func (api *API) configureLogger() error {
 }
 
 func (api *API) configureRouter() {
-	api.router.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		w.Write([]byte("Hello"))
-	})
+	api.router.HandleFunc(prefix+"/articles", api.GetAllArticles).Methods(http.MethodGet)
+	api.router.HandleFunc(prefix+"/articles", api.GetArticleById).Methods(http.MethodGet)
+	api.router.HandleFunc(prefix+"/articles", api.DeleteArticleById).Methods(http.MethodDelete)
+	api.router.HandleFunc(prefix+"/articles", api.CreateArticle).Methods(http.MethodPost)
+
+	api.router.HandleFunc(prefix+"/register", api.RegisterUser).Methods(http.MethodPost)
 }
 
 func (api *API) configureStorage() error {

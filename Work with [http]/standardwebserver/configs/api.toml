@@ -3,4 +3,4 @@ port = ":8080"
 log_level = "debug"
 
 [storage]
-database_uri = "host=localhost port=5432 user=postgres password=postgres dbname=restapi sslmode=disable"
+database_uri = "host=localhost port=55000 user=postgres password=postgrespw dbname=postgres sslmode=disable"
