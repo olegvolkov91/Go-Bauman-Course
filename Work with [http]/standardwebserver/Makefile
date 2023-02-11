@@ -8,7 +8,7 @@ run: build
 	./api
 
 migrate:
-	migrate -path migrations -databse "postgres://localhost:5432/restapi?sslmode=disable&user=postgres&password=postgres" up
+	migrate -path migrations -database "postgres://localhost:5432/restapi?sslmode=disable&user=postgres&password=postgres" up
 
 drop:
-	migrate -path migrations -databse "postgres://localhost:5432/restapi?sslmode=disable&user=postgres&password=postgres" down
+	migrate -path migrations -database "postgres://localhost:5432/restapi?sslmode=disable&user=postgres&password=postgres" down

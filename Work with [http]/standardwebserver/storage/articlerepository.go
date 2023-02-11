@@ -66,6 +66,7 @@ func (ar *ArticleRepository) SelectAll() ([]*models.Article, error) {
 
 	rows, err := ar.storage.db.Query(query)
 	if err != nil {
+		log.Println("ERROR when SELECT ALL db.Query")
 		return nil, err
 	}
 	defer rows.Close()

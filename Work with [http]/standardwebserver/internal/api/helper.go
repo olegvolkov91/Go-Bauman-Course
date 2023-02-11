@@ -20,9 +20,9 @@ func (api *API) configureLogger() error {
 }
 
 func (api *API) configureRouter() {
-	api.router.HandleFunc(prefix+"/articles", api.GetAllArticles).Methods(http.MethodGet)
-	api.router.HandleFunc(prefix+"/articles", api.GetArticleById).Methods(http.MethodGet)
-	api.router.HandleFunc(prefix+"/articles", api.DeleteArticleById).Methods(http.MethodDelete)
+	api.router.HandleFunc(prefix+"/articles", api.GetAllArticles).Methods("GET")
+	api.router.HandleFunc(prefix+"/articles/{id}", api.GetArticleById).Methods(http.MethodGet)
+	api.router.HandleFunc(prefix+"/articles/{id}", api.DeleteArticleById).Methods(http.MethodDelete)
 	api.router.HandleFunc(prefix+"/articles", api.CreateArticle).Methods(http.MethodPost)
 
 	api.router.HandleFunc(prefix+"/register", api.RegisterUser).Methods(http.MethodPost)
