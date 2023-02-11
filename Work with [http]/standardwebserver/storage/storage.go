@@ -7,8 +7,10 @@ import (
 )
 
 type Storage struct {
-	config *Config
-	db     *sql.DB
+	config            *Config
+	db                *sql.DB
+	userRepository    *UserRepository
+	articleRepository *ArticleRepository
 }
 
 func New(config *Config) *Storage {
@@ -32,4 +34,22 @@ func (storage *Storage) Open() error {
 
 func (storage *Storage) Close() {
 	storage.db.Close()
+}
+
+// User ... Public repo for article
+func (storage *Storage) User() *UserRepository {
+	if storage.userRepository != nil {
+		return storage.userRepository
+	}
+	storage.userRepository = &UserRepository{storage}
+	return nil
+}
+
+// Article ... Public repo for article
+func (storage *Storage) Article() *ArticleRepository {
+	if storage.articleRepository != nil {
+		return storage.articleRepository
+	}
+	storage.articleRepository = &ArticleRepository{storage}
+	return nil
 }
