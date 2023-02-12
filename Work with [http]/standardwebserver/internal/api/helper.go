@@ -1,6 +1,8 @@
 package api
 
 import (
+	"github.com/olegvolkov91/Go-Bauman-Course/tree/main/standardwebserver/internal/handler"
+	"github.com/olegvolkov91/Go-Bauman-Course/tree/main/standardwebserver/internal/middleware"
 	"github.com/olegvolkov91/Go-Bauman-Course/tree/main/standardwebserver/storage"
 	"github.com/sirupsen/logrus"
 	"net/http"
@@ -15,17 +17,25 @@ func (api *API) configureLogger() error {
 	if err != nil {
 		return err
 	}
-	api.logger.SetLevel(logLevel)
+	api.Logger.SetLevel(logLevel)
 	return nil
 }
 
-func (api *API) configureRouter() {
-	api.router.HandleFunc(prefix+"/articles", api.GetAllArticles).Methods("GET")
-	api.router.HandleFunc(prefix+"/articles/{id}", api.GetArticleById).Methods(http.MethodGet)
-	api.router.HandleFunc(prefix+"/articles/{id}", api.DeleteArticleById).Methods(http.MethodDelete)
-	api.router.HandleFunc(prefix+"/articles", api.CreateArticle).Methods(http.MethodPost)
+func (api *API) configureHandler() {
+	api.handler = handler.New(api)
+}
 
-	api.router.HandleFunc(prefix+"/user/register", api.RegisterUser).Methods(http.MethodPost)
+func (api *API) configureRouter() {
+	api.router.HandleFunc(prefix+"/articles", api.handler.GetAllArticles).Methods(http.MethodGet)
+	//api.router.HandleFunc(prefix+"/articles/{id}", api.handler.GetArticleById).Methods(http.MethodGet)
+	api.router.Handle(prefix+"/articles/{id}", middleware.JwtMiddleware.Handler(http.HandlerFunc(api.handler.GetArticleById)))
+
+	api.router.HandleFunc(prefix+"/articles/{id}", api.handler.DeleteArticleById).Methods(http.MethodDelete)
+	api.router.HandleFunc(prefix+"/articles", api.handler.CreateArticle).Methods(http.MethodPost)
+
+	api.router.HandleFunc(prefix+"/user/register", api.handler.RegisterUser).Methods(http.MethodPost)
+
+	api.router.HandleFunc(prefix+"user/auth", api.handler.AuthenticateUser).Methods(http.MethodPost)
 }
 
 func (api *API) configureStorage() error {
@@ -36,6 +46,6 @@ func (api *API) configureStorage() error {
 		return err
 	}
 	// сохраняем его в экземпляре API для дальнейшей работы
-	api.storage = store
+	api.Storage = store
 	return nil
 }
