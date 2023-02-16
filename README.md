@@ -1,7 +1,7 @@
 ### Для лучшего закрепления материала прочесть
 ***
 #### Уровень 0. 
-* [Go в примерах](https://gobyexample.com/) - - Done ✅
+* [Go в примерах](https://gobyexample.com/) - Done ✅
 * [Первая книга](https://www.ozon.ru/context/detail/id/34671680/)
 * [Совершенный код](https://www.ozon.ru/context/detail/id/138437220/)
 ***
