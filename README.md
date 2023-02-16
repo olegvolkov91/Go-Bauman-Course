@@ -1,12 +1,12 @@
 ### Для лучшего закрепления материала прочесть
 ***
 #### Уровень 0. 
-* [Go в примерах](https://gobyexample.com/)
+* [Go в примерах](https://gobyexample.com/) - - Done ✅
 * [Первая книга](https://www.ozon.ru/context/detail/id/34671680/)
 * [Совершенный код](https://www.ozon.ru/context/detail/id/138437220/)
 ***
 #### Уровень 1. 
-* [Грокаем алгоритмы](https://www.ozon.ru/context/detail/id/139296295/)
+* [Грокаем алгоритмы](https://www.ozon.ru/context/detail/id/139296295/) - Done ✅
 * [Алгоритмы. Вводный курс](https://www.ozon.ru/context/detail/id/24903185/)
 
 #### Уровень 2.
@@ -15,7 +15,7 @@
 ***
 #### Уровень 2.5
 * [Производительность[SPEC]](https://www.amazon.com/Systems-Performance-Enterprise-Brendan-Gregg/dp/0133390098)
-* [GO структура проекта](https://github.com/golang-standards/project-layout)
+* [GO структура проекта](https://github.com/golang-standards/project-layout) - Done ✅
 ***
 #### Уровень 3
 * [GO структуры](https://github.com/Workiva/go-datastructures)
